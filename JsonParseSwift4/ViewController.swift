@@ -22,10 +22,17 @@ import UIKit
 //    "number_of_lessons": 49
 //}
 struct Course {
-    let id: Int?
-    let name: String?
-    let link: String?
-    let imageUrl: String?
+    let id: Int
+    let name: String
+    let link: String
+    let imageUrl: String
+
+    init(json: [String: Any]) {
+        id = json["id"] as? Int ?? -1
+        name = json["name"] as? String ?? ""
+        link = json["link"] as? String ?? ""
+        imageUrl = json["imageUrl"] as? String ?? ""
+    }
 }
 
 class ViewController: UIViewController {
@@ -45,8 +52,14 @@ class ViewController: UIViewController {
             //            print(dataAsString)
             
             do{
-                let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers)
+                guard let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers)
+                    as? [String: Any] else {return}
+                
                 print(json)
+                
+                let course = Course(json: json)
+                print(course.name)
+    
             } catch let  jsonErr{
                 print("Error serializing json:" , jsonErr)
             }
