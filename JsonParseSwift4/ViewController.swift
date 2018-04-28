@@ -26,14 +26,29 @@ struct Course {
     let name: String?
     let link: String?
     let imageUrl: String?
- }
+}
 
 class ViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-//        let myCourse = Course(id: 1, name: "myCourse", link: "myLink", imageUrl: "some  URL")
-//        print(myCourse)
+        
+        let jsonUrlString = "https://api.letsbuildthatapp.com/jsondecodable/course"
+        let url = URL(string: jsonUrlString)
+        
+        URLSession.shared.dataTask(with: url!) { (data, response, err) in
+            // perhaps checkk err
+            // also perhaps check response status 200 OK
+            guard let data = data else {return}
+            
+            let dataAsString = String(data: data, encoding: .utf8)
+            print(dataAsString)
+            
+            }.resume()
+        
+        
+        //        let myCourse = Course(id: 1, name: "myCourse", link: "myLink", imageUrl: "some  URL")
+        //        print(myCourse)
     }
 }
 
