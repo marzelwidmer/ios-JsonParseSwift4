@@ -54,8 +54,8 @@
 		C01D528620946D0300F5015A /* JsonParseSwift4 */ = {
 			isa = PBXGroup;
 			children = (
-				C01D528720946D0300F5015A /* AppDelegate.swift */,
 				C01D528920946D0300F5015A /* ViewController.swift */,
+				C01D528720946D0300F5015A /* AppDelegate.swift */,
 				C01D528B20946D0300F5015A /* Main.storyboard */,
 				C01D528E20946D0400F5015A /* Assets.xcassets */,
 				C01D529020946D0400F5015A /* LaunchScreen.storyboard */,
