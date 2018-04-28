@@ -21,18 +21,18 @@ import UIKit
 //    "imageUrl": "https://letsbuildthatapp-videos.s3-us-west-2.amazonaws.com/04782e30-d72a-4917-9d7a-c862226e0a93",
 //    "number_of_lessons": 49
 //}
-struct Course {
+struct Course: Decodable {
     let id: Int
     let name: String
     let link: String
     let imageUrl: String
 
-    init(json: [String: Any]) {
-        id = json["id"] as? Int ?? -1
-        name = json["name"] as? String ?? ""
-        link = json["link"] as? String ?? ""
-        imageUrl = json["imageUrl"] as? String ?? ""
-    }
+//    init(json: [String: Any]) {
+//        id = json["id"] as? Int ?? -1
+//        name = json["name"] as? String ?? ""
+//        link = json["link"] as? String ?? ""
+//        imageUrl = json["imageUrl"] as? String ?? ""
+//    }
 }
 
 class ViewController: UIViewController {
@@ -52,13 +52,15 @@ class ViewController: UIViewController {
             //            print(dataAsString)
             
             do{
-                guard let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers)
-                    as? [String: Any] else {return}
-                
-                print(json)
-                
-                let course = Course(json: json)
+                let course = try
+                    JSONDecoder().decode(Course.self, from: data)
                 print(course.name)
+                
+                
+//                guard let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers)
+//                    as? [String: Any] else {return}
+//                let course = Course(json: json)
+//                print(course.name)
     
             } catch let  jsonErr{
                 print("Error serializing json:" , jsonErr)
