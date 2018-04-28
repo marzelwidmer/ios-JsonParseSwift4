@@ -41,8 +41,15 @@ class ViewController: UIViewController {
             // also perhaps check response status 200 OK
             guard let data = data else {return}
             
-            let dataAsString = String(data: data, encoding: .utf8)
-            print(dataAsString)
+            //            let dataAsString = String(data: data, encoding: .utf8)
+            //            print(dataAsString)
+            
+            do{
+                let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers)
+                print(json)
+            } catch let  jsonErr{
+                print("Error serializing json:" , jsonErr)
+            }
             
             }.resume()
         
